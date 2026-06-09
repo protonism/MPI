@@ -19,8 +19,10 @@
 最终提交至 openEuler 实验平台的版本为 `103` 文件夹中的 IVF 综合实验版本。进入该目录后执行：
 
 ```bash
-sh submit.sh 1 8 8 512 64 2000 1 block-id IVF-C
+sh submit.sh 1 8 8 512 64 2000 1 block-id IVF-D
 ```
+
+表示：申请 1 个节点，每个节点 8 个核心，启动 8 个 MPI 进程；IVF 使用 512 个倒排列表，每条 query 扫描其中 64 个列表；测试 2000 条 query；每个 MPI rank 使用 1 个线程；采用按全局 id 连续分块的 `block-id` 策略，并将结果记录为 `IVF-C` 实验组。
 
 通用格式为：
 
@@ -41,14 +43,6 @@ sh submit.sh <nodes> <ppn> <np> <nlist> <nprobe> <test_queries> <threads_per_ran
 | `threads_per_rank` | 每个 MPI rank 内部使用的 OpenMP 线程数 |
 | `partition` | 数据分片策略，可选 `block-id`、`contiguous-list`、`greedy-list` |
 | `group` | 实验分组标签，会写入 CSV，便于后续筛选和绘图 |
-
-示例命令：
-
-```bash
-sh submit.sh 1 8 8 512 64 2000 1 block-id IVF-C
-```
-
-表示：申请 1 个节点，每个节点 8 个核心，启动 8 个 MPI 进程；IVF 使用 512 个倒排列表，每条 query 扫描其中 64 个列表；测试 2000 条 query；每个 MPI rank 使用 1 个线程；采用按全局 id 连续分块的 `block-id` 策略，并将结果记录为 `IVF-C` 实验组。
 
 资源配置需要满足：
 
@@ -172,7 +166,7 @@ sh submit.sh 1 8 8 100 16 150 2000 block-id HNSW-B
 以 `103` 为例，执行：
 
 ```bash
-sh submit.sh 1 8 8 512 64 2000 1 block-id IVF-C
+sh submit.sh 1 8 8 512 64 2000 1 block-id IVF-D
 ```
 
 脚本会依次完成：
